@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="weatherApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Origin Weather App</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/app/styles/styles.css">
+    <!-- endinject -->
+</head>
+
+<body ng-controller="WeatherController as vm">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1>Origin Weather App</h1>
+                <p>Always know if you need an umbrella!</p>
+            </div>
+            <div class=row></div>
+            <div id="btns" class="btn-group col-md-5 col-offset-4">
+                <button class="btn btn-primary" ng-click="vm.SD" type="button-align-left">San Diego</button>
+                    <!--em class="glyphicon glyphicon-align-left"></em> San Diego
+                </button-->
+                <button class="btn btn-primary" ng-click="vm.NY" type="button-align-center">New York</button>
+                    <!--em class="glyphicon glyphicon-align-center"></em> New York
+                </button-->
+                <button class="btn btn-primary" ng-click="vm.TO" type="button-align-right">Tokyo</button>
+                    <!--em class="glyphicon glyphicon-align-right"></em> Tokyo
+                </button-->
+                <button class="btn btn-primary" ng-click="vm.LN" type="buttonalign-justify">London</button>
+                    <!--em class="glyphicon glyphicon-align-justify"></em> London
+                </button-->
+                <button class="btn btn-primary" ng-click="vm.PS" type="buttonalign-justify">Paris</button>
+                    <!--em class="glyphicon glyphicon-align-justify"></em> Paris
+                </button-->
+            </div>
+            <br>
+            <div id="search" class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="vm.Search">
+                    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button">Go!</button>
+      </span>
+                </div>
+            </div>
+        </div>
+
+        <!--Panel1 Left side goes below here-->
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+						City Information
+					</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Temperature(F)
+                                </th>
+                                <th>
+                                    Pressure
+                                </th>
+                                <th>
+                                    Humidity
+                                </th>
+                                <th>
+                                    Lowest Temp(F)
+                                </th>
+                                <th>
+                                    Higest Temp(F)
+                                </th>
+                                <th>
+                                    Wind Speed
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class="active">
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class="success">
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class="warning">
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class="danger">
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+						Search History
+					</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class="active">
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class="success">
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class="warning">
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class="danger">
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbower -->
+    <!--h1>HEY You</h1-->
+    <!--<pre>{{planets | json}}</pre>-->
+
+    <!-- inject:js -->
+    <script src="/app/app.js"></script>
+    <script src="/app/weather.controller.js"></script>
+    <script src="/app/weather.factory.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>
+
+<!--Comments:-->
+<!--    -->
+<!--    -->
+<!--    -->
