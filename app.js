@@ -2,10 +2,10 @@
     'use strict';
 
     angular
-        .module('weatherApp', []);
+        .module('weatherApp', ['toastr']);
 })();
 
 //Comments:
-//
-//
-//
+//JK
+//JKL
+//Vk

@@ -1,4 +1,4 @@
-#search{
+#blah{
 padding-bottom: 20px
 }
 
@@ -6,3 +6,7 @@ padding-bottom: 20px
 padding-bottom: 10px
 
 }
+
+#bg{
+background-color: rgba(0, 0, 255, 0.3);
+}   /* blue with opacity */

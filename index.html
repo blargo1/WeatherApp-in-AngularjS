@@ -6,12 +6,13 @@
     <title>Origin Weather App</title>
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/app/styles/styles.css">
     <!-- endinject -->
 </head>
-
+<!--ng-controller goes inside body tag-->
 <body ng-controller="WeatherController as vm">
     <div class="container-fluid">
         <div class="col-md-12">
@@ -21,194 +22,56 @@
             </div>
             <div class=row></div>
             <div id="btns" class="btn-group col-md-5 col-offset-4">
-                <button class="btn btn-primary" ng-click="vm.SD" type="button-align-left">San Diego</button>
-                    <!--em class="glyphicon glyphicon-align-left"></em> San Diego
-                </button-->
-                <button class="btn btn-primary" ng-click="vm.NY" type="button-align-center">New York</button>
-                    <!--em class="glyphicon glyphicon-align-center"></em> New York
-                </button-->
-                <button class="btn btn-primary" ng-click="vm.TO" type="button-align-right">Tokyo</button>
-                    <!--em class="glyphicon glyphicon-align-right"></em> Tokyo
-                </button-->
-                <button class="btn btn-primary" ng-click="vm.LN" type="buttonalign-justify">London</button>
-                    <!--em class="glyphicon glyphicon-align-justify"></em> London
-                </button-->
-                <button class="btn btn-primary" ng-click="vm.PS" type="buttonalign-justify">Paris</button>
-                    <!--em class="glyphicon glyphicon-align-justify"></em> Paris
-                </button-->
+                <button class="btn btn-primary" ng-click="vm.getWeather(vm.search='San Diego')" type="button-align-left">San Diego</button>
+                <button class="btn btn-primary" ng-click="vm.getWeather(vm.search='New York')" type="button-align-center">New York</button>
+                <button class="btn btn-primary" ng-click="vm.getWeather(vm.search='Tokyo')" type="button-align-right">Tokyo</button>
+                <button class="btn btn-primary" ng-click="vm.getWeather(vm.search='London')" type="buttonalign-justify">London</button>
+                <button class="btn btn-primary" ng-click="vm.getWeather(vm.search='Paris')" type="buttonalign-justify">Paris</button>
             </div>
             <br>
-            <div id="search" class="col-md-8">
+            <!--ng-model, search input and results button below here-->
+            <div id="blah" class="col-md-8">
                 <div class="input-group">
-                    <input type="text" class="form-control" ng-model="vm.Search">
+                    <input type="text" class="form-control" ng-model="vm.search">
                     <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button">Go!</button>
+        <button class="btn btn-secondary" ng-click="vm.getWeather(vm.search)" type="button">Go!</button>
       </span>
                 </div>
             </div>
         </div>
-
-        <!--Panel1 Left side goes below here-->
+        <!--Panel1 Left side goes below here with table-->
         <div class="col-md-7">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-						City Information
-					</h3>
+                    <h3 class="panel-title">City Information</h3>
                 </div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Temperature(F)
-                                </th>
-                                <th>
-                                    Pressure
-                                </th>
-                                <th>
-                                    Humidity
-                                </th>
-                                <th>
-                                    Lowest Temp(F)
-                                </th>
-                                <th>
-                                    Higest Temp(F)
-                                </th>
-                                <th>
-                                    Wind Speed
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="active">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="success">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="warning">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="danger">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                        </tbody>
+                <div class="panel-body" id="bg" ng-hide="vm.name === ''">
+                    <h2 class="text-center"><img ng-src="{{vm.desc}}" >{{vm.name}}
+                	</h2>
+                    <h4 class="text-center">Lat/Long: {{vm.lat}}, {{vm.long}}</h4>
+                    <table class="table table-striped">
+                        <p id="temp">Temperature(F) {{vm.temp}}</p>
+                        <p id="pressure">Pressure {{vm.pressure}}</p>
+                        <p id="humid">Humidity {{vm.humid}}</p>
+                        <p id="low">Lowest Temp(F) {{vm.low}}</p>
+                        <p id="high">Higest Temp(F) {{vm.high}}</p>
+                        <p id="wind">Wind Speed {{vm.wind}}</p>
                     </table>
                 </div>
             </div>
         </div>
+        <!--Panel2 Right side goes below here with search history output-->
         <div class="col-md-5">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-						Search History
-					</h3>
+                    <h5 class="panel-title">Search History</h5>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" ng-hide="vm.name === ''">
                     <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                                <th>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="active">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="success">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="warning">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="danger">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tr ng-repeat="info in vm.history">
+                            <td>{{info.search}}</td>
+                            <td class="text-right">{{info.dt}}</td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -218,10 +81,9 @@
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <!-- endbower -->
     <!--h1>HEY You</h1-->
-    <!--<pre>{{planets | json}}</pre>-->
-
     <!-- inject:js -->
     <script src="/app/app.js"></script>
     <script src="/app/weather.controller.js"></script>
@@ -230,8 +92,7 @@
 </body>
 
 </html>
-
 <!--Comments:-->
-<!--    -->
-<!--    -->
-<!--    -->
+<!-- By: Joseph Kalb, Adding the corrections from html to the controllers and having ng-click on the buttons should get you closer to functioning. Make sure the the function in your controller is defined as vm.getWeather = function(input)... rather than how it is currently written. From that point on you should be closer.   -->
+<!--  By: JKLaumer, in discussion we mentioned refining/cutting down on some of the html code, adding toastr, building out the controller file more, and that the factory is looking good.   -->
+<!-- By: Varun Kapila,    -->

@@ -18,13 +18,14 @@
 
         function getWeather(cityName) {
             var defer = $q.defer();
-
+            //Weather API, URL and unit conversion from kelvin to readable format
             $http({
                     method: 'GET',
                     url: 'http://api.openweathermap.org/data/2.5/weather',
                     params: {
-                        APPID: 'f95eab6f6bca9fb39f009dd8f6421430',
-                        q: cityName
+                        APPID: 'e8f600ad69eb52fcb7a8414be532c6de',
+                        q: cityName,
+                        units: 'imperial'
                     }
                 })
                 .then(
@@ -49,6 +50,6 @@
 })();
 
 //Comments:
-//
-//
-//
+//JK
+//JKL
+//Vk
